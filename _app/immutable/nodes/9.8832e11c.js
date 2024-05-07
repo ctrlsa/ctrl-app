@@ -1,0 +1,1 @@
+import{s,n as e}from"../chunks/scheduler.eb18ca14.js";import{S as n,i as a,E as c,f as r}from"../chunks/index.e48a341d.js";function h(o){return{c(){this.h()},l(t){c("svelte-hosjka",document.head).forEach(r),this.h()},h(){document.title="Settings"},m:e,p:e,i:e,o:e,d:e}}class l extends n{constructor(t){super(),a(this,t,null,h,s,{})}}export{l as component};

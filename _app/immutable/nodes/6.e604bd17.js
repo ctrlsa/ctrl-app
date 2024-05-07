@@ -1,0 +1,1 @@
+import{s as o}from"../chunks/scheduler.eb18ca14.js";import{S as s,i as n}from"../chunks/index.e48a341d.js";import{g as r}from"../chunks/navigation.107ddb5c.js";function a(t){return r("/wallet",{replaceState:!0}),[]}class p extends s{constructor(e){super(),n(this,e,a,null,o,{})}}export{p as component};
