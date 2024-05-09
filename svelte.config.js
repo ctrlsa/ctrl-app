@@ -4,17 +4,14 @@ import { vitePreprocess } from "@sveltejs/kit/vite";
 /** @type {import("@sveltejs/kit").Config} */
 const config = {
   kit: {
-    adapter: adapter({
-      pages: "build",
-      assets: "build",
-      fallback: "index.html",
-      precompress: false,
-      strict: true
-    }),
+    adapter: adapter(),
     files: {
       lib: "src/shared",
       routes: "src/pages"
     },
+    paths: {
+			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
+		},
     alias: {
       $processes: "src/processes",
       $pages: "src/pages",

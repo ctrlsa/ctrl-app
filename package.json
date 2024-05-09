@@ -17,6 +17,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write . && eslint . --fix",
     "test:integration": "playwright test",
+    "deploy": "yarn build && yarn gh-pages -d build -t true",
     "test:unit": "vitest"
   },
   "devDependencies": {
@@ -31,6 +32,8 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-svelte": "^2.30.0",
     "eslint-plugin-unused-imports": "^3.0.0",
+    "gh-pages": "^6.1.1",
+    "import": "^0.0.6",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "prettier-plugin-svelte": "^3.0.3",
@@ -45,10 +48,15 @@
   },
   "type": "module",
   "dependencies": {
+    "@solana/web3.js": "^1.91.8",
+    "@twa-dev/sdk": "^7.0.0",
+    "bip39": "^3.1.0",
     "embla-carousel-autoplay": "8.0.0-rc14",
     "embla-carousel-svelte": "8.0.0-rc14",
     "lucide-svelte": "^0.290.0",
+    "multichain-wallet-sdk": "^1.4.9",
     "svelte-french-toast": "^1.2.0",
-    "svelte-persisted-store": "^0.7.0"
+    "svelte-persisted-store": "^0.7.0",
+    "vite-plugin-node-polyfills": "^0.21.0"
   }
 }
