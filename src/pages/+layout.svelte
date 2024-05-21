@@ -17,7 +17,7 @@
       });
     });
   });
-  const solana = new Connection('https://api.devnet.solana.com', 'confirmed');
+  const solana = new Connection('https://solana-mainnet.g.alchemy.com/v2/EBRBRJt-hrhCXJChUBQn7GOo_EiXJbIX', 'confirmed');
 
   const balancePromise = writable();
   const keypair = writable();

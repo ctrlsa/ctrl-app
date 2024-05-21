@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { ArrowDownSquare, ArrowUpSquare, LogOut } from "lucide-svelte";
-  import Navbar from "$widgets/navbar.svelte";
-  // import { SolanaWallet } from "multichain-wallet-sdk";
+  import { ArrowUpSquare, LogOut } from "lucide-svelte";
   import { toast } from "svelte-french-toast";
   import { 
-    Keypair, SystemProgram, Transaction, LAMPORTS_PER_SOL, Connection 
+    Keypair, LAMPORTS_PER_SOL, Connection 
   } from "@solana/web3.js";
   import { mnemonicToSeed, generateMnemonic } from "bip39";
 
@@ -19,7 +17,6 @@
     const kp = Keypair.fromSeed((await mnemonicToSeed(mnemonic)).subarray(0, 32));
     
     localStorage.setItem('wallet', JSON.stringify({ ...kp, mnemonic }));
-    // toast('Account created successfully');
   }
 
   $: kp = wallet && Keypair.fromSecretKey(new Uint8Array(Object.values(wallet._keypair.secretKey)));
@@ -37,9 +34,11 @@
       loading: `${action[0].toUpperCase()}${action.slice(1)}ing account...`,
       success: `Account ${action}d successfully`,
       error: `Failed to ${action} account`
-    }).finally(() => restoring = false);
+    }).finally(() => {
+      restoring = false
+      wallet = JSON.parse(localStorage.wallet ?? 'null');
+    });
   }
-
   
   let keyInput: any;
 </script>
@@ -49,8 +48,6 @@
 </svelte:head>
 {#if restoring}
   <div class="flex flex-col h-screen">
-    <Navbar>Restore account</Navbar>
-
     <main class="grow px-2 mt-2">
       <div class="grid grid-cols-1 mt-3">
         <textarea bind:value={keyInput} class="textarea textarea-bordered textarea-md w-full h-28"></textarea>
@@ -60,18 +57,6 @@
       </div>
     </main>
   </div>
-<!-- {:else if sending}
-  <div class="flex flex-col h-screen">
-    <Navbar>Send SOL</Navbar>
-
-    <main class="grow px-2 mt-2">
-      <div class="grid grid-cols-1 mt-3">
-        <input bind:value={keyInput} class="input w-full h-28" />
-      </div>
-      <div class="grid grid-cols-1 mt-3">
-        <button class="btn btn-primary" on:click={send}>Send</button>
-      </div>
-    </main> -->
 {:else if wallet}
 <!-- Balance-Action Block -->
 <div class="grid justify-items-center pb-3 pt-2">
@@ -94,7 +79,7 @@
       Send
     </Button>
     <!-- logout -->
-    <Button class="btn btn-error" on:click={() => wallet = localStorage.removeItem('wallet')}>
+    <Button class="btn btn-error" on:click={() => wallet = null}>
       <LogOut />
       Logout
     </Button>

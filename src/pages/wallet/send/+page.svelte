@@ -17,7 +17,10 @@
   const senderKp = get(getContext('keypair')) as Keypair;
   const balancePromise = getContext('balance') as Writable<Promise<number>>;
   async function send() {
-    if (!PublicKey.isOnCurve(to)) 
+    let isValidAddress = false;
+    try { isValidAddress = PublicKey.isOnCurve(to) }
+    catch { isValidAddress = false }
+    if (!isValidAddress)
       return toast.error('Invalid address. Please enter a valid address.');
 
     const tx = new Transaction().add(
