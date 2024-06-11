@@ -4,7 +4,7 @@
 </script>
 
 <Navbar />
-<div class="relative">
+<div class="relative p-2">
   <slot />
 </div>
 <NavbarBottom />

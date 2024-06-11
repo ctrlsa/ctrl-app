@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowUpSquare, LogOut } from "lucide-svelte";
+  import { ArrowDownSquare, ArrowUpSquare, LogOut } from "lucide-svelte";
   import { toast } from "svelte-french-toast";
   import { 
     Keypair, LAMPORTS_PER_SOL, Connection 
@@ -60,7 +60,6 @@
 {:else if wallet}
 <!-- Balance-Action Block -->
 <div class="grid justify-items-center pb-3 pt-2">
-  {kp.publicKey}
   <!-- Wallet Balance -->
   <div class="stats pb-2">
     <div class="stat place-items-center">
@@ -77,6 +76,10 @@
     <Button class="btn btn-primary" href="/wallet/send">
       <ArrowUpSquare />
       Send
+    </Button>
+    <Button class="btn btn-primary" href="/wallet/receive">
+      <ArrowDownSquare />
+      Receive
     </Button>
     <!-- logout -->
     <Button class="btn btn-error" on:click={() => wallet = null}>

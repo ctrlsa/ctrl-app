@@ -55,6 +55,7 @@
     "embla-carousel-svelte": "8.0.0-rc14",
     "lucide-svelte": "^0.290.0",
     "multichain-wallet-sdk": "^1.4.9",
+    "qrcode": "^1.5.3",
     "svelte-french-toast": "^1.2.0",
     "svelte-persisted-store": "^0.7.0",
     "vite-plugin-node-polyfills": "^0.21.0"
