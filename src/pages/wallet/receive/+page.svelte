@@ -1,8 +1,8 @@
 <script lang="ts">
   import Button from "$shared/ui/button/button.svelte";
   import type { Keypair } from "@solana/web3.js";
-    import WebApp from "@twa-dev/sdk";
-  import { CheckIcon, CopyIcon } from "lucide-svelte";
+  import WebApp from "@twa-dev/sdk";
+  import { CopyIcon } from "lucide-svelte";
   import { getContext, onMount } from "svelte";
   import { get } from "svelte/store";
   import Qrcode from "qrcode";
@@ -19,9 +19,10 @@
 
 </script>
 <p class="break-all text-center">
-  {senderKp.publicKey}
+  <!-- svelte-ignore a11y-missing-attribute -->
+  <a role="button" on:keydown={copy} tabindex="-1" on:click={copy}>{senderKp.publicKey}</a>
   <Button on:click={copy} class="btn btn-square btn-xs align-top">
     <CopyIcon />
   </Button>
 </p>
-<canvas class="m-auto" bind:this={canvas} />
+<canvas on:click={copy} class="m-auto" bind:this={canvas} />
