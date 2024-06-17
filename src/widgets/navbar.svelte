@@ -12,9 +12,4 @@
       </Button>
     </div>
   </div>
-  <div class="navbar-end">
-    <Button class="btn btn-circle btn-ghost btn-md">
-      <ScanLine class="h-7 w-7 text-primary" />
-    </Button>
-  </div>
 </nav>
