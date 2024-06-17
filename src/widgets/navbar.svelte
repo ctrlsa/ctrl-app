@@ -1,20 +1,6 @@
 <script>
   import { ChevronDown, ScanLine } from "lucide-svelte";
-
   import Button from "$lib/ui/button/button.svelte";
-  import WebApp from "@twa-dev/sdk";
-  import { page } from "$app/stores";
-
-  let url = $page.url.pathname;
-
-  if (url !== '/wallet') {
-    WebApp.BackButton.onClick(() => {
-      history.back();
-      WebApp.BackButton.hide();
-    });
-
-    WebApp.BackButton.show();
-  }
 </script>
 
 <nav class="navbar sticky top-0 z-10 bg-base-100">

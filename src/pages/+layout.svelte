@@ -6,8 +6,12 @@
   import { Connection, Keypair } from "@solana/web3.js";
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
+  import WebApp from "@twa-dev/sdk";
 
+  WebApp.BackButton.onClick(() => history.back());
   onNavigate((navigation) => {
+    WebApp.BackButton[navigation.to?.url.pathname === '/wallet' ? 'hide' : 'show']();
+
     if (!document.startViewTransition) return;
 
     return new Promise((resolve) => {
@@ -16,7 +20,7 @@
         await navigation.complete;
       });
     });
-  });
+  });  
   const solana = new Connection('https://solana-mainnet.g.alchemy.com/v2/EBRBRJt-hrhCXJChUBQn7GOo_EiXJbIX', 'confirmed');
 
   const balancePromise = writable();
