@@ -4,11 +4,12 @@
   import { onNavigate } from "$app/navigation";
   import { Toaster } from "svelte-french-toast";
   import { Connection, Keypair } from "@solana/web3.js";
-  import { setContext } from "svelte";
+  import { onMount, setContext } from "svelte";
   import { writable } from "svelte/store";
   import WebApp from "@twa-dev/sdk";
 
   WebApp.BackButton.onClick(() => history.back());
+  onMount(() => WebApp.expand());
   onNavigate((navigation) => {
     WebApp.BackButton[navigation.to?.url.pathname === '/wallet' ? 'hide' : 'show']();
 
