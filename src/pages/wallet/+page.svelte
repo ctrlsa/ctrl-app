@@ -1,5 +1,6 @@
 <script lang="ts">
   import { ArrowDownSquare, ArrowUpSquare, LogOut } from "lucide-svelte";
+  import { PUBLIC_SERVER_URL } from "$env/static/public";
   import { toast } from "svelte-french-toast";
   import { 
     Keypair, LAMPORTS_PER_SOL, Connection 
@@ -8,6 +9,7 @@
 
   import Button from "$lib/ui/button/button.svelte";
   import { getContext } from "svelte";
+  import WebApp from "@twa-dev/sdk";
   let restoring = false;
   const solana = getContext('solana') as Connection;
 
@@ -16,7 +18,17 @@
   async function createAccount(mnemonic = generateMnemonic()) {
     const kp = Keypair.fromSeed((await mnemonicToSeed(mnemonic)).subarray(0, 32));
     
-    localStorage.setItem('wallet', JSON.stringify({ ...kp, mnemonic }));
+    return fetch(`${PUBLIC_SERVER_URL}/user/key`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        publicKey: kp.publicKey.toBase58(),
+        userId: String(WebApp.initDataUnsafe.user?.id)
+      }),
+    }).then(() => localStorage.setItem('wallet', JSON.stringify({ ...kp, mnemonic })));
   }
 
   $: kp = wallet && Keypair.fromSecretKey(new Uint8Array(Object.values(wallet._keypair.secretKey)));
